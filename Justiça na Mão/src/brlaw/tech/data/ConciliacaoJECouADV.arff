@@ -1,0 +1,20 @@
+%Title: Teste de conciliacao, Advogado ou JEC
+
+@RELATION ConciliacaoJECouADV
+
+@ATTRIBUTE valordacausa	numeric
+@ATTRIBUTE muitobravo 	{sim,nao}
+@ATTRIBUTE urgente 	{sim,nao}
+@ATTRIBUTE class 	{jec,conciliacao,advogado}
+
+@DATA
+5000,nao,nao,conciliacao
+7000,nao,nao,conciliacao
+2000,nao,nao,conciliacao
+35000,nao,nao,advogado
+35000,sim,nao,advogado
+5000,sim,nao,jec
+20000,nao,nao,advogado
+19000,sim,nao,jec
+
+
