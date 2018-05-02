@@ -62,6 +62,7 @@ public class provaDeConceitoJECAdvConciliacao {
 		
 		//ver quais atributos são possíveis
 		System.out.println("classes possíveis: " + novoCaso.classAttribute());
+		System.out.println("valores do atributo: " + novoCaso.attribute(2));
 
 	    //classifica a instância	
 		double classificacao = classificador.classifyInstance(novoCaso);	
