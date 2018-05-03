@@ -35,12 +35,12 @@ public class provaDeConceitoIris {
 		
 		//opções de saída
 		// 1. ver gráfico em forma de regra
-		//String resultado = classificador.graph();
-		//System.out.println(resultado);
+		String resultado = classificador.graph();
+		System.out.println(resultado);
 		
 		// ver gráfico em forma de desenho
-		//String resultado = classificador.toString();
-		//System.out.println(resultado);
+		String resultado2 = classificador.toString();
+		System.out.println(resultado2);
 		
 		//cria a instância de teste
 		DenseInstance novoCaso = new DenseInstance(5);
@@ -65,10 +65,10 @@ public class provaDeConceitoIris {
 		//novoCaso.setValue(3,0.2);
 		
 		//emula um versicolor
-		//novoCaso.setValue(0,2);
-		//novoCaso.setValue(1,3.2);
-		//novoCaso.setValue(2,4.7);
-		//novoCaso.setValue(3,0.7);
+		novoCaso.setValue(0,2);
+		novoCaso.setValue(1,3.2);
+		novoCaso.setValue(2,4.7);
+		novoCaso.setValue(3,0.7);
 		
 		//emula um virginica
 		//novoCaso.setValue(0,2); //sepal length
