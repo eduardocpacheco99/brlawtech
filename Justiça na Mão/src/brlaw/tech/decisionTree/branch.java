@@ -3,6 +3,7 @@ package brlaw.tech.decisionTree;
 public class branch {
 	private int branch;
 	private String leaf;
+	private String splitter;
 	public branch() {
 		  
 	
@@ -18,6 +19,12 @@ public class branch {
 	}
 	public void setLeaf(String leaf) {
 		this.leaf = leaf;
+	}
+	public String getSplitter() {
+		return splitter;
+	}
+	public void setSplitter(String splitter) {
+		this.splitter = splitter;
 	}
 	
 

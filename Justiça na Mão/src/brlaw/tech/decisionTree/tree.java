@@ -1,18 +1,94 @@
 package brlaw.tech.decisionTree;
+import java.util.ArrayList;
 import java.util.List;
 
 public class tree {
 
-private List<branch> branches;	//lista com todos os galhos da árvore
-private List<rule> rules; //Lista com todas as regras da árvore
+public List<branch> branches = new ArrayList<branch>();	//lista com todos os galhos da árvore
+public List<rule> rules = new ArrayList<rule>(); //Lista com todas as regras da árvore
 	
 public tree(String decisionTree) {
 	String[] lines;
-	decisionTree= decisionTree.replaceAll("digraph J48 Tree{","");
-	decisionTree= decisionTree.replaceAll("}", "");
+	decisionTree= decisionTree.replace("digraph J48Tree {","");
+	decisionTree= decisionTree.replace("}", "");
+	decisionTree= decisionTree.replace("\"", "");
 	lines= decisionTree.split("\n");
+	branch b;
+	rule r;
+	System.out.println(lines[0]+"temos " + lines.length +" linhas");
+	String branchId;
+	String leaf;
+	String fromBranch;
+	String toBranch;
+	String variable;
+	String operation;
+	String value;
+	String splitter;
+	
 	// cria uma lista de linhas de regras
+	String[] rulelines;
+	
 	// cria uma lista de linhas de galhos
+	String[] branchlines;
+	//preenche linha de regras e linha de galhos
+	
+	for(int i=0;i<lines.length;i++) {
+		r = new rule();
+		b = new branch();
+		if(lines[i].contains("label=") && !lines[i].contains("->") && !lines[i].contains("shape")) {
+			//então é pergunta
+			branchId = lines[i].substring(1,lines[i].indexOf(" ["));
+			splitter = lines[i].substring( lines[i].indexOf("label=")+6, lines[i].indexOf("]"));
+
+			b.setBranch(Integer.parseInt(branchId));
+			b.setLeaf(null);
+			b.setSplitter(splitter);
+			branches.add(b);
+
+		} else if(lines[i].contains("label=") && lines[i].contains("->")) {
+			//então é regra
+			fromBranch = lines[i].substring(1, lines[i].indexOf("-"));
+			toBranch = lines[i].substring( lines[i].indexOf(">N")+2, lines[i].indexOf(" ["));
+			value = lines[i].substring( lines[i].indexOf("label=")+6, lines[i].indexOf("]"));
+			
+			r.setFromBranch(Integer.parseInt(fromBranch));
+			r.setToBranch(Integer.parseInt(toBranch));
+			r.setOperation(value.split(" ")[0]);
+			r.setValue(value.split(" ")[1]);
+			rules.add(r);
+
+		} else if (lines[i].contains("shape")) {
+			//então é ramo de folha
+			branchId = lines[i].substring(1,lines[i].indexOf(" ["));
+			leaf = lines[i].substring( lines[i].indexOf("label=")+6, lines[i].indexOf(" ("));
+		
+			b.setBranch(Integer.parseInt(branchId));
+			b.setLeaf(leaf);
+			b.setSplitter(null);
+			branches.add(b);
+		}
+		
+	}
+	
+	for(rule r1: rules) {
+		for(branch b1 : branches) {
+			if(r1.getFromBranch()==b1.getBranch() && b1.getSplitter() != null) {
+				r1.setVariable(b1.getSplitter());
+			}
+		}
+		
+		
+		
+	}
+	System.out.println("Imprimindo todas as regras ");
+	for (rule r1: rules) {
+	System.out.println("Origem " + r1.getFromBranch() + "| destino "+ r1.getToBranch()+ "| "+ " variavel " + r1.getVariable() +" | operação " + r1.getOperation()+" | valor " + r1.getValue());	
+	}
+	System.out.println("Imprimindo todos os ramos");
+	for (branch b1 : branches) {
+		System.out.println("Ramo " + b1.getBranch() + " | folha " + b1.getLeaf() + " | condição" + b1.getSplitter());
+	}
+	
 	// preenche o objeto branch com os valores retirados da linha de galho ( id do galho e, se for folha, a folha)
 	// adiciona na lista de branches
 	// preenche o objeto rule com os valores da lista de galhos E do valor da lista de regras

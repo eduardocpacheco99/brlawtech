@@ -12,6 +12,7 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
+import brlaw.tech.decisionTree.*;
 
 public class pocArvoreJECAdvConciliacao {
 
@@ -34,6 +35,7 @@ public class pocArvoreJECAdvConciliacao {
 		// 1. ver gráfico em forma de regra
 		String resultado = classificador.graph();
 		System.out.println(resultado);
+		tree arv = new tree(resultado);
 /*
 
 
