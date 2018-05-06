@@ -36,6 +36,9 @@ public class pocArvoreJECAdvConciliacao {
 		String resultado = classificador.graph();
 		System.out.println(resultado);
 		tree arv = new tree(resultado);
+		treeReader reader = new treeReader();
+		String pedido = reader.getClaim(arv);
+		System.out.println(pedido);
 /*
 
 
